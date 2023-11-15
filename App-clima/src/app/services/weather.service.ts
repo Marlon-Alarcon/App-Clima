@@ -8,9 +8,16 @@ import { HttpClient } from '@angular/common/http';
 export class WeatherService {
 
   URL: string = ''
+  key = '0c4979dd6605b4e2c2fbddedb517ddc5'
 
 constructor(private httpclient : HttpClient) { 
-  this.URL = ""
+  this.URL = `https://api.openweathermap.org/data/2.5/weather?appid=`
+}
+
+getweather(ciudad:string, pais:string){
+  
+  return this.httpclient.get(`${this.URL}&q=${ciudad},${pais}`)
+
 }
 
 }
