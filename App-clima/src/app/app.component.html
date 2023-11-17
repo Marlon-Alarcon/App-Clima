@@ -4,7 +4,7 @@
 
       <div class="card card-body">
         <!-- <div class="d-flex justify-content-center"> -->
-          <img src="../assets/clima.png" alt="imagen" width="20%" height="20%">
+          <img src="../assets/clima.png" alt="imagen" width="20%" height="20%" class="mx-auto">
         <!-- </div> -->
         <!-- <div class="p-2" style="border-radius: 20px; background-color:#EEF5FF"> -->
           <form>
@@ -22,7 +22,7 @@
               </select>
             </div>
             
-            <button class="btn btn-success mt-2" style="width: 100%;" (click)="sendData(city,country)">Success</button>
+            <button class="btn btn-success mt-2" style="width: 100%;" (click)="sendData(city,country)">Enviar</button>
             
 
           </form>
@@ -33,8 +33,27 @@
 
     <div class="col-md-6">
 
-      <div class="card card-body">
-        <h1>Formulario</h1>
+      <div *ngIf="clima == undefined" class="card card-body">
+        <img src="../assets/calentamiento-global.gif" alt="imagen" width="20%" height="20%" class="mx-auto">
+        <br>
+        <p>Latitud:</p>
+        <p>Lonfitud:</p>
+        <p>Temperatura:</p>
+        <p>Humedad:</p>
+        <p>Maxima:</p>
+        <p>Minima:</p>
+      </div>
+
+      <div *ngIf="clima" class="card card-body">
+
+        <img src="../assets/calentamiento-global.gif" alt="imagen" width="20%" height="20%" class="mx-auto">
+        <br>
+        <p>Latitud: {{clima.coord.lat}}</p>
+        <p>Lonfitud: {{clima.coord.lon}}</p>
+        <p>Temperatura: {{clima.main.temp}}</p>
+        <p>Humedad: {{clima.main.humidity}}</p>
+        <p>Maxima: {{clima.main.temp_max}}</p>
+        <p>Minima: {{clima.main.temp_min}}</p>
       </div>
     </div>
   </div>

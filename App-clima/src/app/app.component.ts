@@ -9,7 +9,9 @@ import { WeatherService } from './services/weather.service';
 export class AppComponent implements OnInit{
 
   jsonData: any = [];
+  clima: any;
   selectedCountry: string = "";
+  espera: boolean = false;
 
   constructor(
     private weatherservice: WeatherService,
@@ -18,10 +20,6 @@ export class AppComponent implements OnInit{
 
 
   ngOnInit(){
-    this.weatherservice.getweather('riohacha','co').subscribe((data)=>{
-      console.log(data,"Datos")
-    },error => console.error(error))
-
 
     this.pais.getpaises().subscribe((data)=>{
       this.jsonData = data
@@ -30,9 +28,29 @@ export class AppComponent implements OnInit{
     },error => console.error(error))
   }
 
-  sendData(city:any,country:any){
-    console.log(city.value)
-    console.log(country.value)
+
+  getclima(city:string, country:string){
+
+    this.weatherservice.getweather(city,country).subscribe((data)=>{
+      this.clima = data
+      console.log(data,"Datos")
+
+      this.espera===true
+    },error => console.error(error))
+
+    
+  }
+
+  sendData(city:HTMLInputElement, country:HTMLSelectElement){
+    // console.log(city.value)
+    // console.log(country.value)
+    this.getclima(city.value, country.value)
+
+    if(this.espera !== true){
+      city.value = ""
+      country.value = ""
+    }
+
     return false
   }
 }
